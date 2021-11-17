@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     private PlayerController playerController;
     private Quaternion rotation = Quaternion.identity;
 
+    private bool running = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,13 +34,15 @@ public class Movement : MonoBehaviour
         var diff = newPosition - swordPosition;
 
         var angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        
+
         rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+
+        running = Input.GetKey(KeyCode.LeftShift);
     }
 
     private void FixedUpdate()
     {
-        playerController.Move(xMove * Time.deltaTime, yMove * Time.deltaTime);
+        playerController.Move(xMove * Time.deltaTime, yMove * Time.deltaTime, running);
     }
 }

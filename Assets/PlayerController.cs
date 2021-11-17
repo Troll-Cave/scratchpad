@@ -5,34 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public LayerMask LayerMask;
-    float baseSpeed = 2f;
+    public float baseSpeed = 40f;
+    private Vector3 m_Velocity = Vector3.zero;
+
     public void Move(float x, float y)
     {
-        baseSpeed = 2f;
-        var position = this.gameObject.transform.position;
-        foreach (var thing in Physics2D.OverlapCircleAll(new Vector2(position.x + x, position.y), 0.2f, LayerMask))
-        {
-            if (thing.gameObject != gameObject)
-            {
-                x = 0;
-                baseSpeed = 1f;
-                break;
-            }
-        }
+        var rigidBody = GetComponent<Rigidbody2D>();
 
-        foreach (var thing in Physics2D.OverlapCircleAll(new Vector2(position.x, position.y + y), 0.2f, LayerMask))
-        {
-            if (thing.gameObject != gameObject)
-            {
-                y = 0;
-                baseSpeed = 1f;
-                break;
-            }
-        }
-
-        position.x = position.x + x * baseSpeed;
-        position.y = position.y + y * baseSpeed;
-
-        this.gameObject.transform.position = position;
+        Vector3 targetVelocity = new Vector2(x * baseSpeed, y * baseSpeed);
+        // This is mostly for kicking up the speed quickly. Otherwise it will take a hot minute and be garbage.
+        // It also handles stopping since it moves from a current state to a target state.
+        rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref m_Velocity, 0.05f);
     }
 }

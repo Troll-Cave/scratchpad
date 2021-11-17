@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-    float xMove = 0;
-    float yMove = 0;
+    Vector2 movement;
 
     public float rotationSpeed = 9f;
 
@@ -13,6 +13,14 @@ public class Movement : MonoBehaviour
     private Quaternion rotation = Quaternion.identity;
 
     private bool running = false;
+
+    private PlayerInput input;
+
+    private void Awake()
+    {
+        input = GetComponent<PlayerInput>();
+        input.actions["Run"].performed += ctx => running = ctx.ReadValueAsButton();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +31,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xMove = Input.GetAxisRaw("Horizontal") * 2.5f;
-        yMove = Input.GetAxisRaw("Vertical") * 2.5f;
-
-        var mousePosition = Input.mousePosition;
+        movement = input.actions["Movement"].ReadValue<Vector2>();
+        var mousePosition = input.actions["Look"].ReadValue<Vector2>();
 
         var newPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         var swordPosition = transform.position;
@@ -38,11 +44,11 @@ public class Movement : MonoBehaviour
         rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
-        running = Input.GetKey(KeyCode.LeftShift);
+        //running = Input.GetKey(KeyCode.LeftShift);
     }
 
     private void FixedUpdate()
     {
-        playerController.Move(xMove * Time.deltaTime, yMove * Time.deltaTime, running);
+        playerController.Move(movement * Time.deltaTime * 5, running);
     }
 }

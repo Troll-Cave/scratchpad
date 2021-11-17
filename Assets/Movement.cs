@@ -35,6 +35,11 @@ public class Movement : MonoBehaviour
         Debug.Log(movement);
         var mousePosition = input.actions["Look"].ReadValue<Vector2>();
 
+        if (mousePosition == Vector2.zero)
+        {
+            return;
+        }
+
         if (input.currentControlScheme != "xbox")
         {
             var newPosition = Camera.main.ScreenToWorldPoint(mousePosition);

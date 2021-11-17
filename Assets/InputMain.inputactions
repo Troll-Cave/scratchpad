@@ -9,7 +9,7 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "47a9f25b-00e1-4285-81bd-1e3440668ccd",
-                    "expectedControlType": "Dpad",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -154,9 +154,9 @@
                 {
                     "name": "",
                     "id": "4d038b88-44ac-49d8-a96a-375e29444153",
-                    "path": "<Gamepad>/dpad",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "ScaleVector2(x=2,y=2)",
                     "groups": "xbox",
                     "action": "Movement",
                     "isComposite": false,

@@ -7,6 +7,8 @@ public class Movement : MonoBehaviour
     float xMove = 0;
     float yMove = 0;
 
+    public float rotationSpeed = 9f;
+
     private PlayerController playerController;
     private Quaternion rotation = Quaternion.identity;
 
@@ -29,17 +31,14 @@ public class Movement : MonoBehaviour
 
         var diff = newPosition - swordPosition;
 
-        var angle = Mathf.Atan2(diff.x, diff.y) * Mathf.Rad2Deg;
-
-        //transform.forward = diff;
+        var angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
         
-        rotation = Quaternion.AngleAxis(-angle, Vector3.forward);
+        rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
     }
 
     private void FixedUpdate()
     {
         playerController.Move(xMove * Time.deltaTime, yMove * Time.deltaTime);
-        //transform.Rotate(new Vector3(0, 0, 50));
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, .2f);
     }
 }

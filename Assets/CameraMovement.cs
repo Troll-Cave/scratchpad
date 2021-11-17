@@ -16,9 +16,9 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (input.actions["MoveCamera"].IsPressed())
+        /*if (input.actions["MoveCamera"].IsPressed())
         {
             gameObject.GetComponent<Camera>().transform.Translate(input.actions["MouseMove"].ReadValue<Vector2>() * Time.deltaTime * cameraMoveSpeed, Space.World);
-        }
+        }*/
     }
 }

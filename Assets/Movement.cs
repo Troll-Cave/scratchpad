@@ -32,14 +32,20 @@ public class Movement : MonoBehaviour
     void Update()
     {
         movement = input.actions["Movement"].ReadValue<Vector2>();
+        Debug.Log(movement);
         var mousePosition = input.actions["Look"].ReadValue<Vector2>();
 
-        var newPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        var swordPosition = transform.position;
+        if (input.currentControlScheme != "xbox")
+        {
+            var newPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            var swordPosition = transform.position;
 
-        var diff = newPosition - swordPosition;
+            mousePosition = newPosition - swordPosition;
+        }
 
-        var angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        Debug.Log(input.currentControlScheme);
+
+        var angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 
         rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);

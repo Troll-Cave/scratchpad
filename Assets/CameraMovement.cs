@@ -17,7 +17,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var newPos = player.transform.position + player.GetComponent<Movement>().lookVector;
+        var newPos = player.transform.position;
         //newPos.x = Mathf.Clamp(newPos.x, -1, 1);
         //newPos.y = Mathf.Clamp(newPos.y, -1, 1);
 

@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     private bool running = false;
 
     private PlayerInput input;
+    public Vector3 lookVector = Vector3.zero;
 
     private void Awake()
     {
@@ -32,7 +33,6 @@ public class Movement : MonoBehaviour
     void Update()
     {
         movement = input.actions["Movement"].ReadValue<Vector2>();
-        Debug.Log(movement);
         var mousePosition = input.actions["Look"].ReadValue<Vector2>();
 
         if (mousePosition == Vector2.zero)
@@ -46,10 +46,10 @@ public class Movement : MonoBehaviour
             var swordPosition = transform.position;
 
             mousePosition = newPosition - swordPosition;
+            Debug.Log(mousePosition);
         }
 
-        Debug.Log(input.currentControlScheme);
-
+        lookVector = mousePosition;
         var angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 
         rotation = Quaternion.AngleAxis(angle, Vector3.forward);

@@ -46,10 +46,8 @@ public class Movement : MonoBehaviour
             var swordPosition = transform.position;
 
             mousePosition = newPosition - swordPosition;
-            Debug.Log(mousePosition);
         }
 
-        lookVector = mousePosition;
         var angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 
         rotation = Quaternion.AngleAxis(angle, Vector3.forward);

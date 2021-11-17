@@ -18,8 +18,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xMove = Input.GetAxisRaw("Horizontal") * 5f;
-        yMove = Input.GetAxisRaw("Vertical") * 5f;
+        xMove = Input.GetAxisRaw("Horizontal") * 2.5f;
+        yMove = Input.GetAxisRaw("Vertical") * 2.5f;
     }
 
     private void FixedUpdate()

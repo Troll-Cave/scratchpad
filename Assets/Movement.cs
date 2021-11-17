@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    float xMove = 0;
+    float yMove = 0;
+
+    private PlayerController playerController;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        var position = this.gameObject.transform.position;
-        
-        var xright = Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
-        var xleft = Input.GetKey(KeyCode.LeftArrow) ? 1 : 0;
+        xMove = Input.GetAxisRaw("Horizontal") * 5f;
+        yMove = Input.GetAxisRaw("Vertical") * 5f;
+    }
 
-        var xup = Input.GetKey(KeyCode.UpArrow) ? 1 : 0;
-        var xdown = Input.GetKey(KeyCode.DownArrow) ? 1 : 0;
-
-        position.x = position.x + ((2f * Time.deltaTime) * (xright - xleft));
-        position.y = position.y + ((2f * Time.deltaTime) * (xup - xdown));
-
-        this.gameObject.transform.position = position;
+    private void FixedUpdate()
+    {
+        playerController.Move(xMove * Time.deltaTime, yMove * Time.deltaTime);
     }
 }

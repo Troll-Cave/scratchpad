@@ -5,3 +5,11 @@
 .health .unity-progress-bar__background {
 	border-color: #ff0000;
 }
+
+.mana .unity-progress-bar__progress {
+	background-color: #0000FF;
+}
+
+.mana .unity-progress-bar__background {
+	border-color: #0000FF;
+}

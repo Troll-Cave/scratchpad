@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/progress-bar.uss?fileID=7433441132597879392&amp;guid=7b6898a4455285e40b91e7ef750e04f1&amp;type=3#progress-bar" />
+    <ui:VisualElement style="position: absolute; bottom: 0; width: 150px;">
+        <ui:Button text="Click Me" display-tooltip-when-elided="true" name="Clicker" tooltip="Click me bro" />
+        <ui:ProgressBar title="Health" name="Health" view-data-key="a" class="health" style="-unity-background-image-tint-color: rgba(255, 8, 42, 255);" />
+    </ui:VisualElement>
+</ui:UXML>

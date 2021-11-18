@@ -1,0 +1,7 @@
+.health .unity-progress-bar__progress {
+	background-color: #ff0000;
+}
+
+.health .unity-progress-bar__background {
+	border-color: #ff0000;
+}
